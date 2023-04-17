@@ -1,0 +1,42 @@
+create database task;
+use task;
+create table Person(
+id int,
+name varchar(10)
+);
+create table Employee(
+id int,
+name varchar(10)
+);
+insert into Person values
+(1,'John'),
+(2,'Sam'),
+(3,'Jerry');
+
+insert into Employee values
+(7,'Emp1'),
+(8,'Emp2'),
+(3,'Jerry');
+
+select * from Person;
+select * from Employee;
+
+select * from Person
+union
+select * from Employee;
+
+
+select * from Person
+union all
+select * from Employee;
+
+
+
+select * from Person
+intersect
+select * from Employee;
+
+
+select * from Person
+except
+select * from Employee;
