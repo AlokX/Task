@@ -1,0 +1,32 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT *
+  FROM customer;
+SELECT *
+  FROM orders;
+
+create view OrderSinceAug
+as
+select customer.customer_id,customer_name,order_no,order_date from customer join orders
+on customer.customer_id=orders.customer_id 
+where
+MONTH(order_date)>8;
+
+create view OrderValueGreaterThanThousand
+as
+select customer.customer_id,customer_name,order_no,purchase_amount from customer join orders
+on customer.customer_id=orders.customer_id 
+where
+purchase_amount>100;
+-- drop view OrderValueGreaterThanThousand;
+select * from OrderValueGreaterThanThousand;
+select * from OrderSinceAug;
+
+create view OrdersOfInterest
+as
+select OrderSinceAug.customer_id,OrderSinceAug.customer_name,OrderSinceAug.order_date,OrderValueGreaterThanThousand.purchase_amount 
+from OrderValueGreaterThanThousand right join OrderSinceAug
+on OrderValueGreaterThanThousand.order_no=OrderSinceAug.order_no;
+-- drop view OrersOfInterest;
+
+select * from OrdersOfInterest;
+
